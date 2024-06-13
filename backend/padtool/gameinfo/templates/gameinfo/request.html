@@ -1,11 +1,16 @@
+{% load static %}
+
 <div>
     <label for="monster_input">Search: </label>
     <input type="text" id="monster_input">
 </div>
 <div id="monster_box">
     <ul>
-        {% for monster in monsters %}
-            <li>xdlmao</li>
+        {% for monster, image_path in monsters %}
+            <li>
+                <p>{{ monster }}</p>
+                <img src="{% static image_path %}">
+            </li>
         {% endfor %}
     </ul>
 </div>

@@ -161,7 +161,7 @@ class RawMonster():
         return ({
             "model" : "gameinfo.Monster_Attribute",
             "fields" : {
-                "monster_att_id" : pkey_id,
+                "monster_att_id" : pkey_id + ind,
                 "monster_id_monster" : self.id,
                 "monster_attribute" : att.name,
                 "attribute_number" : ind + 1

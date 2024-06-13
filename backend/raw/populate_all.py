@@ -44,8 +44,10 @@ with open('padtool/gameinfo/fixtures/leader_skills.json','w') as f:
 att_pkey = 1
 monster_attribute_dicts = []
 for mon in owned_monsters:
-    monster_attribute_dicts.extend(mon.get_monster_attributes(att_pkey))
-    att_pkey += 1
+    atts = mon.get_monster_attributes(att_pkey)
+    orig_size = len(monster_attribute_dicts)
+    monster_attribute_dicts.extend(atts)
+    att_pkey += len(monster_attribute_dicts) - orig_size
 monster_attribute_json = json.dumps(monster_attribute_dicts)
 with open('padtool/gameinfo/fixtures/monster_attribute.json', 'w') as f:
     f.write(monster_attribute_json)

@@ -46,7 +46,7 @@ class Monster_Attribute(models.Model):
 
     class Meta:
         managed = True
-        unique_together = (('monster_id_monster', 'monster_attribute', 'attribute_number'),)
+        unique_together = (('monster_id_monster', 'attribute_number'),)
 
 class Awakening(models.Model):
     awakening_id = models.AutoField(primary_key=True)
