@@ -14,8 +14,12 @@ class RawMonster():
             # Returns curve which is (min, max, scale)
             return (next(dataIter), next(dataIter), next(dataIter))
         
+        def _fix_id(id: int) -> int:
+            if (id >= 10000): return id - 100
+            return id
+
         dataIter = iter(data)
-        self.id: int = next(dataIter)
+        self.id: int = _fix_id(next(dataIter))
         self.name: str = next(dataIter)
         
         self.attributes: list[MonsterAttribute] = [MonsterAttribute(next(dataIter))]
@@ -58,9 +62,9 @@ class RawMonster():
             'exp_per_level': next(dataIter)
         }
 
-        self.prev_evo_id: int = next(dataIter)
-        self.evo_materials: list[int] = [next(dataIter) for i in range(5)]
-        self.devo_materials: list[int] = [next(dataIter) for i in range(5)]
+        self.prev_evo_id: int = _fix_id(next(dataIter))
+        self.evo_materials: list[int] = [_fix_id(next(dataIter)) for i in range(5)]
+        self.devo_materials: list[int] = [_fix_id(next(dataIter)) for i in range(5)]
 
         # When >0, the enemy turn timer for technical dungeons.
         self.enemy_info['turn_timer'] = next(dataIter)
@@ -104,7 +108,7 @@ class RawMonster():
         num_awakenings: int = next(dataIter)
         self.awakenings: list[int] = [next(dataIter) for i in range(num_awakenings)]
         self.super_awakenings: list[int] = list(map(int, filter(str.strip, next(dataIter).split(','))))
-        self.root_id: int = next(dataIter) #fixing needs to be done?
+        self.root_id: int = _fix_id(next(dataIter)) 
         self.series_id: int = next(dataIter)
 
         third_type: int = next(dataIter)
