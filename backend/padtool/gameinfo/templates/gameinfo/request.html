@@ -1,8 +1,33 @@
 {% load static %}
 
-<div>
-    <label for="monster_input">Search: </label>
-    <input type="text" id="monster_input">
+<div id="search_box">
+    <form>
+        <div id="text_search">
+            <label for="monster_input">Search: </label>
+            <input type="text" id="monster_input">
+        </div>
+        <div id="attribute">
+            {% for att_num, att_text in attributes %}
+                <input type="checkbox" id="{{att_text}}" name="{{att_text}}" value="{{att_text}}">
+                <label for="{{att_text}}">{{ att_text }}</label>
+            {% endfor %}
+        </div>
+        <div id="type_search">
+            {% for type_num, type_text in types %}
+                <input type="checkbox" id="{{type_text}}" name="{{type_text}}" value="{{type_text}}">
+                <label for="{{type_text}}">{{ type_text }}</label>
+            {% endfor %}
+        </div>
+        <div id="awakening_search">
+            Awakening search to be implemented
+        </div>
+    </form>
+    <p>asdf</p>
+    <form action="/gameinfo/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
 </div>
 <div id="monster_box">
     <ul>

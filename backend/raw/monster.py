@@ -167,7 +167,7 @@ class RawMonster():
             "fields" : {
                 "monster_att_id" : pkey_id + ind,
                 "monster_id_monster" : self.id,
-                "monster_attribute" : att.name,
+                "monster_attribute" : att.value,
                 "attribute_number" : ind + 1
             }
         } for ind, att in enumerate(self.attributes))
@@ -178,7 +178,7 @@ class RawMonster():
             "fields" : {
                 "monster_type_id" : pkey_id,
                 "monster_id_monster" : self.id,
-                "monster_type" : monster_type.name,
+                "monster_type" : monster_type.value,
                 "type_number" : ind + 1
             }
         } for ind, monster_type in enumerate(self.types))

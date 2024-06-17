@@ -23,12 +23,23 @@ class Monster(models.Model):
     root_monster = models.ForeignKey("Monster", on_delete=models.CASCADE)
 
 class Monster_Type(models.Model):
-    MonsterType = models.TextChoices("MonsterType",
-        "GOD DRAGON DEVIL MACHINE BALANCED ATTACKER PHYSCIAL EVO_MATERIAL AWAKEN_MATERIAL ENHANCE_MATERIAL REDEEMABLE_MATERIAL",
-    ) 
+    class Type(models.IntegerChoices):
+        EVO_MATERIAL = 0, "EVO_MATERIAL"
+        BALANCED = 1, "BALANCED"
+        PHYSICAL = 2, "PHYSICAL"
+        HEALER = 3, "HEALER"
+        DRAGON = 4, "DRAGON"
+        GOD = 5, "GOD"
+        ATTACKER = 6, "ATTACKER"
+        DEVIL = 7, "DEVIL"
+        MACHINE = 8, "MACHINE"
+        AWAKEN_MATERIAL = 12, "AWAKEN_MATERIAL"
+        ENHANCE_MATERIAL = 14, "ENHANCE_MATERIAL"
+        REDEEMABLE_MATERIAL = 15, "REDEEMABLE_MATERIAL"
+
     monster_type_id = models.BigAutoField(primary_key=True)
     monster_id_monster = models.ForeignKey(Monster, on_delete=models.CASCADE)
-    monster_type = models.CharField(blank=False, choices=MonsterType, max_length=20)
+    monster_type = models.SmallIntegerField(blank=False, choices=Type.choices)
     type_number = models.IntegerField(default=-1)
 
     class Meta:
@@ -36,12 +47,17 @@ class Monster_Type(models.Model):
         unique_together = (('monster_id_monster','monster_type'),)
 
 class Monster_Attribute(models.Model):
-    AttributeType = models.TextChoices("AttributeType",
-        "FIRE WATER WOOD LIGHT DARK EMPTY",
-    )
+    class Attribute(models.IntegerChoices):
+        FIRE = 0, "FIRE"
+        WATER = 1, "WATER"
+        WOOD = 2, "WOOD"
+        LIGHT = 3, "LIGHT"
+        DARK = 4, "DARK"
+        EMPTY = 6, "EMPTY"
+
     monster_att_id = models.BigAutoField(primary_key=True)
     monster_id_monster = models.ForeignKey(Monster, on_delete=models.CASCADE)
-    monster_attribute = models.CharField(blank=False, choices=AttributeType, max_length=10)
+    monster_attribute = models.SmallIntegerField(blank=False, choices=Attribute.choices)
     attribute_number = models.IntegerField()
 
     class Meta:

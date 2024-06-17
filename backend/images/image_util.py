@@ -30,7 +30,6 @@ def get_image(id: int = 3, attributes: list[int] = [6, 3], output_path: str = TE
     file_name: str = 'CARDS_' + page_str + '.PNG'
     path: str = os.path.join(BASE_DIR_PATH, MONSTER_PAGE_DIR)
     path = os.path.join(path, file_name)
-    print("file name is ", file_name)
 
     try:
         # get base monster image
@@ -38,7 +37,6 @@ def get_image(id: int = 3, attributes: list[int] = [6, 3], output_path: str = TE
         monsters_page_img = Image.open(path)
         start_x = 2 + 102 * ((id - 1) % 10)
         start_y = 2 + 102 * (((id - 1)%100)//10)
-        print("startx is ", start_x, " starty is ", start_y)
         base_img = monsters_page_img.crop((start_x, start_y, start_x + 96, start_y + 96))
         base_image_path = "temp_images/monster" + str(id) + ".PNG"
         base_image_path = os.path.join(BASE_DIR_PATH, base_image_path)
